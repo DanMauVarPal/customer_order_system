@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>User</OriginalElement>
+  <nodes>
+    <node x="-97.0" y="999.5">PaymentMethod</node>
+    <node x="487.5" y="1647.0">Validator</node>
+    <node x="-90.5" y="587.0">Catalog</node>
+    <node x="564.0" y="550.5">User</node>
+    <node x="506.5" y="830.5">Customer</node>
+    <node x="-112.5" y="-13.5">Product</node>
+    <node x="295.5" y="1774.5">CustomerOrderSystem</node>
+    <node x="-97.0" y="1394.5">CreditCardPayment</node>
+    <node x="217.0" y="1346.5">Order</node>
+    <node x="539.0" y="1346.5">AuthService</node>
+    <node x="62.5" y="306.5">Cart</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="AuthService" target="Customer" relationship="TO_MANY">
+      <point x="66.5" y="-104.5" />
+      <point x="738.5" y="1291.0" />
+      <point x="852.0" y="1291.0" />
+      <point x="852.0" y="1251.0" />
+      <point x="872.0" y="1251.0" />
+      <point x="872.0" y="771.0" />
+      <point x="589.25" y="771.0" />
+      <point x="-82.75" y="-200.5" />
+    </edge>
+    <edge source="CustomerOrderSystem" target="Order" relationship="TO_MANY">
+      <point x="58.25" y="-176.5" />
+      <point x="470.25" y="1751.0" />
+      <point x="472.0" y="1751.0" />
+      <point x="472.0" y="1591.0" />
+      <point x="432.0" y="1591.0" />
+      <point x="432.0" y="1311.0" />
+      <point x="312.0" y="1311.0" />
+      <point x="0.0" y="-104.5" />
+    </edge>
+    <edge source="AuthService" target="Customer" relationship="CREATE">
+      <point x="-66.5" y="-104.5" />
+      <point x="605.5" y="1291.0" />
+      <point x="672.0" y="1291.0" />
+      <point x="0.0" y="200.5" />
+    </edge>
+    <edge source="CustomerOrderSystem" target="CreditCardPayment" relationship="CREATE">
+      <point x="-58.25" y="-176.5" />
+      <point x="353.75" y="1751.0" />
+      <point x="312.0" y="1751.0" />
+      <point x="312.0" y="1571.0" />
+      <point x="32.0" y="1571.0" />
+      <point x="0.0" y="56.5" />
+    </edge>
+    <edge source="CustomerOrderSystem" target="Cart" relationship="TO_ONE">
+      <point x="58.25" y="-176.5" />
+      <point x="470.25" y="1751.0" />
+      <point x="472.0" y="1751.0" />
+      <point x="472.0" y="791.0" />
+      <point x="532.0" y="791.0" />
+      <point x="532.0" y="271.0" />
+      <point x="192.0" y="271.0" />
+      <point x="0.0" y="-104.5" />
+    </edge>
+    <edge source="CreditCardPayment" target="PaymentMethod" relationship="REALIZATION">
+      <point x="0.0" y="-56.5" />
+      <point x="0.0" y="31.5" />
+    </edge>
+    <edge source="CustomerOrderSystem" target="AuthService" relationship="TO_ONE">
+      <point x="58.25" y="-176.5" />
+      <point x="470.25" y="1751.0" />
+      <point x="472.0" y="1751.0" />
+      <point x="472.0" y="1591.0" />
+      <point x="832.0" y="1591.0" />
+      <point x="832.0" y="1311.0" />
+      <point x="738.5" y="1311.0" />
+      <point x="66.5" y="-104.5" />
+    </edge>
+    <edge source="Cart" target="Product" relationship="TO_MANY">
+      <point x="0.0" y="-104.5" />
+      <point x="192.0" y="251.0" />
+      <point x="112.0" y="251.0" />
+      <point x="112.0" y="231.0" />
+      <point x="104.25" y="231.0" />
+      <point x="72.25" y="104.5" />
+    </edge>
+    <edge source="Catalog" target="Product" relationship="CREATE">
+      <point x="-41.25" y="-44.0" />
+      <point x="-49.25" y="551.0" />
+      <point x="-40.25" y="551.0" />
+      <point x="-72.25" y="104.5" />
+    </edge>
+    <edge source="CustomerOrderSystem" target="AuthService" relationship="CREATE">
+      <point x="-58.25" y="-176.5" />
+      <point x="353.75" y="1751.0" />
+      <point x="312.0" y="1751.0" />
+      <point x="312.0" y="1571.0" />
+      <point x="512.0" y="1571.0" />
+      <point x="512.0" y="1311.0" />
+      <point x="605.5" y="1311.0" />
+      <point x="-66.5" y="-104.5" />
+    </edge>
+    <edge source="Customer" target="User" relationship="GENERALIZATION">
+      <point x="82.75" y="-200.5" />
+      <point x="754.75" y="751.0" />
+      <point x="692.0" y="751.0" />
+      <point x="0.0" y="80.5" />
+    </edge>
+    <edge source="Customer" target="Cart" relationship="TO_ONE">
+      <point x="-82.75" y="-200.5" />
+      <point x="589.25" y="791.0" />
+      <point x="532.0" y="791.0" />
+      <point x="532.0" y="271.0" />
+      <point x="192.0" y="271.0" />
+      <point x="0.0" y="-104.5" />
+    </edge>
+    <edge source="CustomerOrderSystem" target="Customer" relationship="TO_ONE">
+      <point x="58.25" y="-176.5" />
+      <point x="470.25" y="1751.0" />
+      <point x="472.0" y="1751.0" />
+      <point x="472.0" y="1591.0" />
+      <point x="872.0" y="1591.0" />
+      <point x="872.0" y="1291.0" />
+      <point x="852.0" y="1291.0" />
+      <point x="852.0" y="1251.0" />
+      <point x="872.0" y="1251.0" />
+      <point x="872.0" y="771.0" />
+      <point x="589.25" y="771.0" />
+      <point x="-82.75" y="-200.5" />
+    </edge>
+    <edge source="CustomerOrderSystem" target="Order" relationship="CREATE">
+      <point x="-58.25" y="-176.5" />
+      <point x="353.75" y="1751.0" />
+      <point x="312.0" y="1751.0" />
+      <point x="0.0" y="104.5" />
+    </edge>
+    <edge source="Order" target="Cart" relationship="TO_ONE">
+      <point x="0.0" y="-104.5" />
+      <point x="312.0" y="791.0" />
+      <point x="532.0" y="791.0" />
+      <point x="532.0" y="271.0" />
+      <point x="192.0" y="271.0" />
+      <point x="0.0" y="-104.5" />
+    </edge>
+    <edge source="Catalog" target="Product" relationship="TO_MANY">
+      <point x="41.25" y="-44.0" />
+      <point x="33.25" y="251.0" />
+      <point x="112.0" y="251.0" />
+      <point x="112.0" y="231.0" />
+      <point x="104.25" y="231.0" />
+      <point x="72.25" y="104.5" />
+    </edge>
+    <edge source="CustomerOrderSystem" target="Cart" relationship="CREATE">
+      <point x="-58.25" y="-176.5" />
+      <point x="353.75" y="1751.0" />
+      <point x="312.0" y="1751.0" />
+      <point x="312.0" y="1571.0" />
+      <point x="192.0" y="1571.0" />
+      <point x="0.0" y="104.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Compact" zoom="0.28908418131359853" showDependencies="true" x="389.4999999999998" y="1067.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>Project Files</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
