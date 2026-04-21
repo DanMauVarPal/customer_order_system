@@ -30,6 +30,15 @@ public class Customer extends User {
     }
 
     /**
+     * Returns the customer name
+     *
+     * @return the customer name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
      * Returns the customer credit card
      *
      * @return the customer credit card

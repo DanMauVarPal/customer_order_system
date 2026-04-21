@@ -12,6 +12,13 @@ public class Order {
     private final Cart cart;
     private final int authCode;
 
+    /**
+     * Constructs a Customer with login credentials
+     *
+     * @param customerId    the customer id
+     * @param cart          the order cart
+     * @param authCode      the order authorization code
+     */
     public Order(String customerId, Cart cart, int authCode) {
         this.orderDate = new Date();
         this.customerId = customerId;

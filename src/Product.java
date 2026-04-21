@@ -35,11 +35,20 @@ public class Product {
     }
 
     /**
-     * Returns the name of the product
+     * Returns the product name
      *
      * @return the name
      */
     public String getName() {
         return name;
+    }
+
+    /**
+     * Returns the product description
+     *
+     * @return the description
+     */
+    public String getDescription() {
+        return description;
     }
 }

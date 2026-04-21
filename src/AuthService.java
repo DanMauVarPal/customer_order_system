@@ -4,7 +4,7 @@ import java.util.*;
  * Provides authentication services for the Customer Order System
  * Maintains a collection of registered customers
  *
- * @version 1.0
+ * @version 1.1
  */
 public class AuthService {
     private final Map<String, Customer> customers = new HashMap<>();
@@ -66,7 +66,7 @@ public class AuthService {
 
                 // Step 5: Check if security answer is correct
                 if (answer.equalsIgnoreCase(c.getSecurityAnswer())) {
-                    System.out.println("Welcome to Customer Order System!");
+                    System.out.println("Welcome " + c.getName() + "!");
                     return c;
                 } else {
                     System.out.println("Incorrect security answer");
@@ -76,15 +76,6 @@ public class AuthService {
         }
 
         return null;
-    }
-
-    /**
-     * Logs out the customer
-     *
-     * @param c the customer currently logged in
-     */
-    public void logOut(Customer c) {
-        c = null;
     }
 
     /**

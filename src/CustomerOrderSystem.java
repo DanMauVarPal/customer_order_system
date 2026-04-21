@@ -13,11 +13,13 @@ public class CustomerOrderSystem {
     ArrayList<Order> orders = new ArrayList<>();
     AuthService auth = new AuthService();
     Customer loggedIn;
-    Cart cart;
+    Cart cart = new Cart();
 
     public static void main(String[] args) {
-        CustomerOrderSystem cos = new CustomerOrderSystem();
-        cos.run();
+        // Create store
+        CustomerOrderSystem tiendaMies = new CustomerOrderSystem();
+        // Run store
+        tiendaMies.run();
     }
 
     /**
@@ -26,37 +28,46 @@ public class CustomerOrderSystem {
     public void run() {
         System.out.println("Welcome to the Customer Order System (COS)");
 
-        boolean running = true;
-        while (running) {
-            if (loggedIn == null) {
-                running = showMainMenu();
-            } else {
+        // System Run
+        boolean menu = true;
+        while (menu) {
+            // Show menu for log in or sign up
+            if (loggedIn == null)
+                menu = showMainMenu();
+
+            // Show customer menu
+            else
                 showCustomerMenu();
-            }
         }
+
         System.out.println("Thank you for using COS. Goodbye!");
     }
 
     private boolean showMainMenu() {
-        System.out.print("--- Main Menu ---" +
-                "\n1. Log On" +
-                "\n2. Create Account" +
-                "\n3. Exit" +
-                "\nSelect an option: ");
+        System.out.print("""
+                
+                --- Main Menu ---
+                1. Log In
+                2. Sign Up
+                3. Exit
+                Select an option:\s""");
 
         String choice = scanner.nextLine();
 
         return switch (choice) {
+            // Log In
             case "1" -> {
                 loggedIn = auth.logOn(scanner);
                 yield true;
             }
 
+            // Sign Up
             case "2" -> {
                 loggedIn = auth.createAccount(scanner);
                 yield true;
             }
 
+            // Exit Program
             case "3" -> false;
 
             default -> {
@@ -67,32 +78,42 @@ public class CustomerOrderSystem {
     }
 
     private void showCustomerMenu() {
-        System.out.print("\n--- Customer Menu ---" +
-                "\n1. Select Items (Browse Catalog)" +
-                "\n2. Make Order (Checkout)" +
-                "\n3. View Orders" +
-                "\n4. Log Out" +
-                "\nSelect an option: ");
+        System.out.print("""
+                
+                --- Customer Menu ---
+                1. Select Items
+                2. Make Order (Checkout)
+                3. View Orders
+                4. Log Out
+                Select an option:\s""");
 
         String choice = scanner.nextLine();
 
         switch (choice) {
+            // Select items and add to cart
             case "1":
                 System.out.println("\n--- Select Items ---");
-                selectItems(scanner);
+                selectItems();
                 break;
+
+            // Checkout
             case "2":
                 System.out.println("\n--- Make Order ---");
-                makeOrder(scanner);
+                makeOrder();
                 break;
+
+            // View Customer's Orders
             case "3":
                 System.out.println("\n--- View Orders ---");
                 viewOrder();
                 break;
+
+            // Log Out
             case "4":
                 System.out.println("\nLogging out...");
                 loggedIn = null;
                 break;
+
             default:
                 System.out.println("Invalid option. Please try again.");
         }
@@ -100,119 +121,132 @@ public class CustomerOrderSystem {
 
     /**
      * Adds products to cart of logged in customer
-     *
-     * @return a confirmation boolean for successful selection
      */
-    public boolean selectItems(Scanner scanner) {
-        Cart cart = new Cart();
-
-        // Step 2: Catalog display
-        for (int i = 0; i < Catalog.products.length; i++)
-            System.out.println((i + 1) + ". " + Catalog.products[i].getName() + " - $" + Catalog.products[i].getEffectivePrice());
-
-        System.out.println((Catalog.products.length + 1) + ". Checkout" +
-                "\n0. Exit product selection");
-
+    public void selectItems() {
         while (true) {
-            // Step 3: Product selection
+            // Catalog display
+            for (int i = 0; i < Catalog.products.length; i++)
+                System.out.println((i + 1) + ". " + Catalog.products[i].getName() +
+                        " - $" + Catalog.products[i].getEffectivePrice() +
+                        " Desc: " + Catalog.products[i].getDescription());
+
+            System.out.println((Catalog.products.length + 1) + ". Checkout" +
+                            (Catalog.products.length + 2) + ". Empty Cart" +
+                    "\n0. Exit product selection");
+
+            // Product selection
             System.out.print("Enter selection: ");
             int choice = Integer.parseInt(scanner.nextLine());
 
-            // Step 3: No product selection
-            if (choice < 0 || choice > (Catalog.products.length + 1)) {
+            // Invalid selections
+            if (choice < 0 || choice > (Catalog.products.length + 2)) {
                 System.out.println("Invalid selection");
-                break;
-            } else if (choice == 0) {
+                continue;
+            }
+
+            // Exit selection
+            else if (choice == 0) {
                 System.out.println("Exit product selection");
                 break;
             }
 
-            // Step 5: Checkout
-            if (choice == (Catalog.products.length + 1)) {
+            // Checkout
+            else if (choice == (Catalog.products.length + 1)) {
+                // Display products in cart
                 for (Product p : cart.getItems().keySet())
                     System.out.println(p.getName() + " - Quantity: " + cart.getItems().get(p));
 
                 System.out.println("Total price: $" + cart.calculateTotal());
 
-                if (loggedIn != null)
-                    loggedIn.setCart(cart);
-                return true;
+                // Add cart to logged in customer
+                loggedIn.setCart(cart);
+
+                return;
             }
 
-            // Step 3: Quantity input
+            // Get a new cart
+            else if (choice == (Catalog.products.length + 2))
+                cart = new Cart();
+
+            // Item selected
+            // Quantity input
             System.out.print("Select quantity: ");
             int quantity = Integer.parseInt(scanner.nextLine());
 
-            // Step 4: Cart updating
+            // Cart update
             cart.addProduct(Catalog.products[choice - 1], quantity);
         }
-
-        return false;
     }
 
     /**
      * Makes an order for the logged in customer
-     *
-     * @return a confirmation boolean for order making
      */
-    public boolean makeOrder(Scanner scanner) {
-        if (loggedIn == null || loggedIn.getCart() == null) {
+    public void makeOrder() {
+        // No items selected in cart
+        if (loggedIn.getCart() == null) {
             System.out.println("Your cart is empty. Please select items first.");
-            return false;
+            return;
         }
 
-        // Step 2: Delivery methods display
-        System.out.println("Select delivery:\n" +
-                "1. Mail by charging a fee ($3.00)\n" +
-                "2. In-store pick up for free");
+        // Delivery method selection
+        System.out.print("""
+                
+                Select delivery:
+                1. Mail by charging a fee ($3.00)
+                2. In-store pick up for free
+                Enter selection:\s""");
 
-        // Step 3: Delivery method selection
-        System.out.print("Enter selection: ");
         int choice = Integer.parseInt(scanner.nextLine());
 
         double total = loggedIn.getCart().getTotal();
 
-        if (choice == 1)
-            total += 3;
-            // Step 3: Exit order making
-        else if (choice != 2) {
-            System.out.println("Order cancelled.");
-            return false;
-        }
+        switch (choice) {
+            case 1:
+                total += 3;
+            case 2:
+                System.out.println("Total: $" + total);
 
-        // Step 4: Order details display
-        System.out.println("Total: $" + total);
+                // Simulate payment
+                CreditCardPayment payment = new CreditCardPayment(loggedIn.getCreditCard());
+                while (true) {
+                    // Requesting bank approval
+                    if (payment.processPayment(total)) {
+                        // Auth Code
+                        int authCode = new Random().nextInt(9000) + 1000;
 
-        // Step 5: User credit card retrieval
-        CreditCardPayment payment = new CreditCardPayment(loggedIn.getCreditCard());
+                        // Store order
+                        orders.add(new Order(loggedIn.getId(), loggedIn.getCart(), authCode));
 
-        while (true) {
-            // Step 6: Requesting bank approval
-            if (payment.processPayment(total)) {
-                // Step 7: Auth Code
-                int authCode = new Random().nextInt(9000) + 1000;
+                        // Clear the cart after a successful order
+                        loggedIn.setCart(null);
 
-                // Step 8: Store order
-                orders.add(new Order(loggedIn.getId(), loggedIn.getCart(), authCode));
+                        // Order confirmation display
+                        System.out.println("Order confirmed. Authorization code: " + authCode);
+                        return;
+                    }
 
-                // Clear the cart after a successful order
-                loggedIn.setCart(null);
+                    // Denied credit card & new entry
+                    System.out.print("""
+                            Bank denied the charge.
+                            Enter new credit card number (or type 'exit' to cancel):\s""");
 
-                // Step 9: Order confirmation display
-                System.out.println("Order confirmed. Authorization code: " + authCode);
-                return true;
-            }
+                    String newCard = scanner.nextLine();
 
-            // Step 7: Denied credit card & new entry
-            System.out.print("Bank denied the charge. Enter new credit card number (or type 'exit' to cancel): ");
-            String newCard = scanner.nextLine();
+                    // Exit payment
+                    if (newCard.equalsIgnoreCase("exit")) {
+                        System.out.println("Order cancelled.");
+                        return;
+                    }
 
-            if (newCard.equalsIgnoreCase("exit")) {
+                    // Assign new credit card to customer
+                    loggedIn.setCreditCard(newCard);
+
+                    // Update the payment method instance with the new card
+                    payment = new CreditCardPayment(newCard);
+                }
+
+            default:
                 System.out.println("Order cancelled.");
-                return false;
-            }
-            loggedIn.setCreditCard(newCard);
-            payment = new CreditCardPayment(newCard); // Update the payment method instance with the new card
         }
     }
 
@@ -220,19 +254,14 @@ public class CustomerOrderSystem {
      * Customer orders display
      */
     public void viewOrder() {
-        if (loggedIn == null)
-            return;
-
         boolean hasOrders = false;
-        for (Order o : orders) {
+        for (Order o : orders)
             if (o.getCustomerId().equals(loggedIn.getId())) {
                 o.displayOrder();
                 hasOrders = true;
             }
-        }
 
-        if (!hasOrders) {
+        if (!hasOrders)
             System.out.println("You have no past orders.");
-        }
     }
 }
