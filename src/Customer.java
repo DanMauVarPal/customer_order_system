@@ -3,7 +3,7 @@
  * Stores personal information, payment details, and security credentials
  * Inherits from the User class
  *
- * @version 1.0
+ * @version 1.1
  */
 public class Customer extends User {
     private final String name;

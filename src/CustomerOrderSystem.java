@@ -6,7 +6,7 @@ import java.util.*;
  * This class coordinates interactions between system components
  * Handles Item Selection, Order Making, and Order View
  *
- * @version 1.0
+ * @version 2.0
  */
 public class CustomerOrderSystem {
     Scanner scanner = new Scanner(System.in);

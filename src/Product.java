@@ -2,7 +2,7 @@
  * Represents a product available in the system catalog
  * Stores name, description, pricing, and sale price
  *
- * @version 1.0
+ * @version 1.1
  */
 public class Product {
     private final String name;
