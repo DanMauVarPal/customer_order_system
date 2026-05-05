@@ -3,17 +3,17 @@
   <ID>JAVA</ID>
   <OriginalElement>User</OriginalElement>
   <nodes>
-    <node x="-108.5" y="1939.5">Validator</node>
-    <node x="183.0" y="1806.5">CustomerOrderSystem</node>
-    <node x="533.5" y="319.5">Catalog</node>
-    <node x="411.5" y="-13.5">Product</node>
-    <node x="-113.0" y="932.5">PaymentMethod</node>
-    <node x="6.5" y="438.5">Cart</node>
-    <node x="328.0" y="462.5">User</node>
-    <node x="-113.0" y="1546.5">CreditCardPayment</node>
-    <node x="81.0" y="1258.5">Order</node>
-    <node x="370.5" y="750.5">Customer</node>
     <node x="403.0" y="1510.5">AuthService</node>
+    <node x="81.0" y="1258.5">Order</node>
+    <node x="328.0" y="462.5">User</node>
+    <node x="-113.0" y="932.5">PaymentMethod</node>
+    <node x="-108.5" y="1939.5">Validator</node>
+    <node x="370.5" y="750.5">Customer</node>
+    <node x="-113.0" y="1546.5">CreditCardPayment</node>
+    <node x="183.0" y="1806.5">CustomerOrderSystem</node>
+    <node x="411.5" y="-13.5">Product</node>
+    <node x="533.5" y="319.5">Catalog</node>
+    <node x="6.5" y="438.5">Cart</node>
   </nodes>
   <notes />
   <edges>
@@ -37,6 +37,12 @@
       <point x="176.0" y="1224.0" />
       <point x="0.0" y="-105.5" />
     </edge>
+    <edge source="AuthService" target="Customer" relationship="CREATE">
+      <point x="-66.5" y="-93.5" />
+      <point x="469.5" y="1464.0" />
+      <point x="536.0" y="1464.0" />
+      <point x="0.0" y="213.5" />
+    </edge>
     <edge source="CustomerOrderSystem" target="CreditCardPayment" relationship="CREATE">
       <point x="-56.5" y="-177.5" />
       <point x="239.5" y="1784.0" />
@@ -44,12 +50,6 @@
       <point x="176.0" y="1684.0" />
       <point x="16.0" y="1684.0" />
       <point x="0.0" y="57.5" />
-    </edge>
-    <edge source="AuthService" target="Customer" relationship="CREATE">
-      <point x="-66.5" y="-93.5" />
-      <point x="469.5" y="1464.0" />
-      <point x="536.0" y="1464.0" />
-      <point x="0.0" y="213.5" />
     </edge>
     <edge source="CustomerOrderSystem" target="Cart" relationship="TO_ONE">
       <point x="56.5" y="-177.5" />
@@ -63,14 +63,6 @@
       <point x="136.0" y="404.0" />
       <point x="0.0" y="-105.5" />
     </edge>
-    <edge source="Cart" target="Product" relationship="TO_MANY">
-      <point x="0.0" y="-105.5" />
-      <point x="136.0" y="284.0" />
-      <point x="476.0" y="284.0" />
-      <point x="476.0" y="244.0" />
-      <point x="483.75" y="244.0" />
-      <point x="-72.25" y="117.5" />
-    </edge>
     <edge source="CustomerOrderSystem" target="AuthService" relationship="TO_ONE">
       <point x="56.5" y="-177.5" />
       <point x="352.5" y="1784.0" />
@@ -80,6 +72,14 @@
       <point x="696.0" y="1484.0" />
       <point x="602.5" y="1484.0" />
       <point x="66.5" y="-93.5" />
+    </edge>
+    <edge source="Cart" target="Product" relationship="TO_MANY">
+      <point x="0.0" y="-105.5" />
+      <point x="136.0" y="284.0" />
+      <point x="476.0" y="284.0" />
+      <point x="476.0" y="244.0" />
+      <point x="483.75" y="244.0" />
+      <point x="-72.25" y="117.5" />
     </edge>
     <edge source="CreditCardPayment" target="PaymentMethod" relationship="REALIZATION">
       <point x="0.0" y="-57.5" />
@@ -91,6 +91,12 @@
       <point x="628.25" y="284.0" />
       <point x="72.25" y="117.5" />
     </edge>
+    <edge source="Customer" target="User" relationship="GENERALIZATION">
+      <point x="82.75" y="-213.5" />
+      <point x="618.75" y="684.0" />
+      <point x="456.0" y="684.0" />
+      <point x="0.0" y="81.5" />
+    </edge>
     <edge source="CustomerOrderSystem" target="AuthService" relationship="CREATE">
       <point x="-56.5" y="-177.5" />
       <point x="239.5" y="1784.0" />
@@ -101,12 +107,6 @@
       <point x="469.5" y="1484.0" />
       <point x="-66.5" y="-93.5" />
     </edge>
-    <edge source="Customer" target="User" relationship="GENERALIZATION">
-      <point x="82.75" y="-213.5" />
-      <point x="618.75" y="684.0" />
-      <point x="456.0" y="684.0" />
-      <point x="0.0" y="81.5" />
-    </edge>
     <edge source="Customer" target="Cart" relationship="TO_ONE">
       <point x="-82.75" y="-213.5" />
       <point x="453.25" y="704.0" />
@@ -116,6 +116,12 @@
       <point x="296.0" y="404.0" />
       <point x="136.0" y="404.0" />
       <point x="0.0" y="-105.5" />
+    </edge>
+    <edge source="CustomerOrderSystem" target="Order" relationship="CREATE">
+      <point x="-56.5" y="-177.5" />
+      <point x="239.5" y="1784.0" />
+      <point x="176.0" y="1784.0" />
+      <point x="0.0" y="105.5" />
     </edge>
     <edge source="CustomerOrderSystem" target="Customer" relationship="TO_ONE">
       <point x="56.5" y="-177.5" />
@@ -130,12 +136,6 @@
       <point x="736.0" y="724.0" />
       <point x="453.25" y="724.0" />
       <point x="-82.75" y="-213.5" />
-    </edge>
-    <edge source="CustomerOrderSystem" target="Order" relationship="CREATE">
-      <point x="-56.5" y="-177.5" />
-      <point x="239.5" y="1784.0" />
-      <point x="176.0" y="1784.0" />
-      <point x="0.0" y="105.5" />
     </edge>
     <edge source="Order" target="Cart" relationship="TO_ONE">
       <point x="0.0" y="-105.5" />
@@ -166,7 +166,7 @@
       <point x="0.0" y="105.5" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Compact" zoom="0.34779143897996356" showDependencies="true" x="694.1636661211128" y="1084.0" />
+  <settings layout="Hierarchic Compact" zoom="0.34779143897996356" showDependencies="true" x="1583.5" y="1279.0" />
   <SelectedNodes />
   <Categories>
     <Category>Constructors</Category>
