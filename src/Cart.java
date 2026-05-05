@@ -1,4 +1,5 @@
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Represents a shopping cart containing selected products and their quantities

@@ -1,4 +1,4 @@
-import java.util.*;
+import java.util.Date;
 
 /**
  * Represents a completed customer order
@@ -15,9 +15,9 @@ public class Order {
     /**
      * Constructs a Customer with login credentials
      *
-     * @param customerId    the customer id
-     * @param cart          the order cart
-     * @param authCode      the order authorization code
+     * @param customerId the customer id
+     * @param cart       the order cart
+     * @param authCode   the order authorization code
      */
     public Order(String customerId, Cart cart, int authCode) {
         this.orderDate = new Date();
@@ -44,5 +44,17 @@ public class Order {
      */
     public String getCustomerId() {
         return customerId;
+    }
+
+    /**
+     * Formats the order details as a String for the GUI.
+     *
+     * @return A formatted string of the order details.
+     */
+    public String getOrderDetails() {
+        return "Order Date: " + orderDate + "\n" +
+                "Items: " + cart.getItems().toString() + "\n" +
+                "Total: $" + String.format("%.2f", cart.getTotal()) + "\n" +
+                "Auth Code: " + authCode;
     }
 }

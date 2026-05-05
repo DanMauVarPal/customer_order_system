@@ -1,4 +1,6 @@
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
 
 /**
  * Provides authentication services for the Customer Order System
@@ -17,6 +19,16 @@ public class AuthService {
      */
     public void register(Customer c) {
         customers.put(c.getId(), c);
+    }
+
+    /**
+     * Retrieves a customer by ID for GUI authentication
+     *
+     * @param id the customer ID
+     * @return the Customer object, or null if not found
+     */
+    public Customer getCustomer(String id) {
+        return customers.get(id);
     }
 
     /**

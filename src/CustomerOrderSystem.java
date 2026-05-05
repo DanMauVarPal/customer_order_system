@@ -1,4 +1,6 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Scanner;
 
 /**
  * Main driver class for the Customer Order System (COS)
@@ -35,7 +37,7 @@ public class CustomerOrderSystem {
             if (loggedIn == null)
                 menu = showMainMenu();
 
-            // Show customer menu
+                // Show customer menu
             else
                 showCustomerMenu();
         }
@@ -131,7 +133,7 @@ public class CustomerOrderSystem {
                         " Desc: " + Catalog.products[i].getDescription());
 
             System.out.println((Catalog.products.length + 1) + ". Checkout" +
-                            (Catalog.products.length + 2) + ". Empty Cart" +
+                    (Catalog.products.length + 2) + ". Empty Cart" +
                     "\n0. Exit product selection");
 
             // Product selection
